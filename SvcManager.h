@@ -6,7 +6,7 @@
 
 namespace MatchIo {
 
-// open, close, control driver service
+// service manager: open, close, control driver service
 class SvcManager {
 
 	constexpr static size_t SVCNAME_LEN = 80;

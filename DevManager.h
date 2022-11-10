@@ -4,7 +4,7 @@
 
 namespace MatchIo {
 
-// open, close, control device
+// device manager: open, close, control device
 class DevManager {
 	constexpr static size_t DEVNAME_LEN = 80;
 public:

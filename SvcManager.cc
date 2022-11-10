@@ -727,7 +727,7 @@ BOOL __stdcall SvcManager::StopDependentServices()
 
     // Pass a zero-length buffer to get the required buffer size.
     if (EnumDependentServices(schService, SERVICE_ACTIVE,
-        lpDependencies, 0, &dwBytesNeeded, &dwCount))
+         lpDependencies, 0, &dwBytesNeeded, &dwCount))
     {
         // If the Enum call succeeds, then there are no dependent
         // services, so do nothing.
