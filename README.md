@@ -1,5 +1,6 @@
 ### Some notes:
-**About the driver**
+
+#### About the driver
 
 The signed driver file (`204.sys`) is extracted from an old plugin (`ÌìÊ¹²å¼þ`).
 The plugin binary (`TSPlugin.dll`) has been publicly usable for some years.
@@ -24,7 +25,7 @@ In brief, the workflow of the driver is like follows:
 The driver, however is signed, so you can use it in a normal Windows machine, without disabling the driver signature enforcement,
 which is the reason why I use the driver, instead of creating one.
 
-**About the service manager**
+#### About the service manager
 
 I just copy and paste the service management codes from the [MSDN sample](https://learn.microsoft.com/en-us/windows/win32/services/the-complete-service-sample),
 while there are two pitfalls for this program:
@@ -32,8 +33,13 @@ while there are two pitfalls for this program:
 2. The argument `szPath` for `CreateService` cannot be quoted for kernel driver objects/files, though the above [MSDN sample](https://learn.microsoft.com/en-us/windows/win32/services/the-complete-service-sample) `Svc.cpp` give a misleading comment that quotes are necessary to avoid spaces in paths. The issue is referred only in a [stackoverflow thread](https://stackoverflow.com/questions/50954450/createservice-and-quotes-for-lpbinarypathname-parameter).
 3. Function `CreateService` can still succeed to create a service, even if the path (`szPath`) to its object is invalid. And this issue cannot only be found when starting the service by `StartService`, which will lead to error code `123 (ERROR_INVALID_NAME)`
 
-**About the driver interface**
+#### About the driver interface
 
-keyboard `dwIoControlCode` used to `DeviceIoControl` the driver:
+In order to to press keys using the driver, some `DeviceIoControl` arguments need to be specified:
+
+`dwIoControlCode`:
 - keydown: `0x80102110`
 - keyup: `0x80102130`
+
+`lpInBuffer`:
+- key scan code (`int`) of length 4
