@@ -31,7 +31,7 @@ I just copy and paste the service management codes from the [MSDN sample](https:
 while there are two pitfalls for this program:
 1. In function `SvcInstall`, function `CreateService` will use `SERVICE_KERNEL_DRIVER` rather than `SERVICE_WIN32_OWN_PROCESS`.
 2. The argument `szPath` for `CreateService` cannot be quoted for kernel driver objects/files, though the above [MSDN sample](https://learn.microsoft.com/en-us/windows/win32/services/the-complete-service-sample) `Svc.cpp` gives a misleading comment that quotes are necessary to avoid spaces in paths. The issue is referred to only in a [stackoverflow thread](https://stackoverflow.com/questions/50954450/createservice-and-quotes-for-lpbinarypathname-parameter).
-3. Function `CreateService` can still succeed to create a service, even if the path (`szPath`) to its object is invalid. And this issue cannot only be found when starting the service by `StartService`, which will lead to error code `123 (ERROR_INVALID_NAME)`.
+3. Function `CreateService` can still succeed to create a service, even if the path (`szPath`) to its object is invalid. And this issue cannot be found in most service related procedures (like stop, enable, disable, change properties of the service), until starting the service by calling `StartService`, which will lead to error code `123 (ERROR_INVALID_NAME)`.
 
 ### About the driver interface
 
