@@ -11,7 +11,7 @@ Surprisingly the driver file can be found and extracted by 7-zip from a built-in
 By decompiling the driver file using IDA Pro,
 I found the driver itself is nothing more than a regular keyboard/mouse filter driver whose approach has been widely utilized.
 The approach is to create a kernel driver in order to get and invoke the function `KeyboardClassServiceCallback` in `Kdbclass.sys`.
-The function can send different keystroke contained in a KEYBOARD_INPUT_DATA structure.
+The function can send different keystrokes contained in a `KEYBOARD_INPUT_DATA` structure.
 The driver also exposes an interface for user space applications to interact with it by function `DeviceIoControl`.
 In brief, the workflow of the driver is like follows:
 ```
