@@ -18,7 +18,7 @@ SvcManager::SvcManager(const TCHAR* svcName, const TCHAR* fileName) : schSCManag
     // spaces in path work properly
     StringCbPrintf(szPath, MAX_PATH, TEXT("%s\\%s"), szUnquotedPath, fileName);
 #ifdef _DEBUG
-    wprintf_s(L"file path: %s; service name: %s\n", szPath, szSvcName);
+    _tprintf(TEXT("file path: %s; service name: %s\n"), szPath, szSvcName);
     //StringCbPrintf(szPath, MAX_PATH, TEXT("%s"), L"C:\\Users\\ccc\\Desktop\\Debug\\204.sys");
     //wprintf_s(L"File path: \"%s\"; Service name: %s\n", szPath, szSvcName);
 #endif
@@ -369,7 +369,7 @@ VOID __stdcall SvcManager::DoStartSvc()
 
     // Get a handle to the service.
 #ifdef _DEBUG
-    wprintf_s(L"service name: %s\n", szSvcName);
+    _tprintf(TEXT("service name : %s\n"), szSvcName);
 #endif
     schService = OpenService(
         schSCManager,         // SCM database
@@ -722,7 +722,7 @@ BOOL __stdcall SvcManager::StopDependentServices()
     SC_HANDLE               hDepService;
     SERVICE_STATUS_PROCESS  ssp;
 
-    DWORD dwStartTime = GetTickCount64();
+    ULONGLONG dwStartTime = GetTickCount64();
     DWORD dwTimeout = 30000; // 30-second time-out
 
     // Pass a zero-length buffer to get the required buffer size.

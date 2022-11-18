@@ -5,13 +5,11 @@
 #include "DevManager.h"
 
 int main() {
-    constexpr static TCHAR svcName[] = L"MatchIo";
-    constexpr static TCHAR sysName[] = L"204.sys";
-    MatchIo::SvcManager sm{ L"MatchIo", L"204.sys" };
-    MatchIo::DevManager dm{ L"MatchIo" };
-    //TCHAR szPath[MAX_PATH];
-    //StringCbPrintf(szPath, MAX_PATH, TEXT("\"%s\\%s\""), L"C:", L"204.sys");
-    //wprintf_s(L"%s", szPath);
+    constexpr static TCHAR svcName[] = TEXT("MatchIo");
+    constexpr static TCHAR sysName[] = TEXT("204.sys");
+    MatchIo::SvcManager sm{ TEXT("MatchIo"), TEXT("204.sys") };
+    MatchIo::DevManager dm{ TEXT("MatchIo") };
+
     sm.SvcInstall();
     sm.DoStartSvc();
 
