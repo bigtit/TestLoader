@@ -15,12 +15,14 @@ The function can send different keystrokes contained in a `KEYBOARD_INPUT_DATA` 
 The driver also exposes an interface for user space applications to interact with it by function `DeviceIoControl`.
 In brief, the workflow of the driver is like follows:
 ```
-  (application)
-        |                                                        user space
-        | DeviceIoControl
---------+-------------------------------------------------------------------
-        |        KeyboardClassServiceCallback                    kernel space
-  (the driver) <------------------------------> (kdbclass.sys)
++--------------------------------------------------------------+--------------
+| (application)                                                |
+|       |                                                      | user space
+|       | DeviceIoControl()                                    |
++-------+------------------------------------------------------+--------------
+|       |       KeyboardClassServiceCallback()                 |
+| (the driver) <------------------------------> (kdbclass.sys) | kernel space
++--------------------------------------------------------------+--------------
 ```
 The driver, however is signed, so you can use it in a normal Windows machine, without disabling the driver signature enforcement,
 which is the reason why I use the driver, instead of creating one.
